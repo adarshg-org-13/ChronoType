@@ -1,0 +1,160 @@
+/* Main theme file contains more than 10 fonts and more than 8 themes */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=VT323&family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&family=Syne+Mono&family=IBM+Plex+Mono:wght@400;500&family=Space+Mono:wght@400;700&family=Rubik+Glitch&family=Creepster&family=Press+Start+2P&family=Montserrat:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #FFFFFF;
+    --text: #2D3748;
+    --primary: #1CD651;
+    --secondary: #A6B9C6;
+    --muted: #718096;
+    --error: #ef4444;
+    --font-mono-family: "Fira Code", ui-monospace,Sfmono-Regular,monospace;
+  }
+
+  .font-fira {
+    --font-mono-family: "Fira Code", ui-monospace,SfMono-Regular,monospace;
+  }
+
+  .font-jetbrains {
+    --font-mono-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-vt323 {
+    --font-mono-family: "VT323", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-courier {
+    --font-mono-family: "Courier Prime", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-sharetech {
+    --font-mono-family: "Share Tech Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-syne {
+    --font-mono-family: "Syne Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-ibm {
+    --font-mono-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-space {
+    --font-mono-family: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-glitch {
+    --font-mono-family: "Rubik Glitch", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-creepster {
+    --font-mono-family: "Creepster", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-arcade {
+    --font-mono-family: "Press Start 2P", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .font-montserrat {
+    --font-mono-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .dark {
+    --bg: #36343B;
+    --text: #F7F9F0;
+    --primary: #ef4444;
+    --secondary: #fca5a5;
+    --muted: #6b6a73;
+    --error: #b91c1c;
+  }
+
+  .dracula {
+    --bg: #282a36;
+    --text: #f8f8f2;
+    --primary: #ff79c6;
+    --secondary: #bd93f9;
+    --muted: #6272a4;
+    --error: #ff5555;
+  }
+
+  .nord {
+    --bg: #2e3440;
+    --text: #eceff4;
+    --primary: #88c0d0;
+    --secondary: #81a1c1;
+    --muted: #4c566a;
+    --error: #bf616a;
+  }
+
+  .midnight {
+    --bg: #0f172a;
+    --text: #f8fafc;
+    --primary: #38bdf8;
+    --secondary: #94a3b8;
+    --muted: #334155;
+    --error: #f87171;
+  }
+
+  .monokai {
+    --bg: #272822;
+    --text: #f8f8f2;
+    --primary: #a6e22e;
+    --secondary: #66d9ef;
+    --muted: #75715e;
+    --error: #f92672;
+  }
+
+  .synthwave {
+    --bg: #2b213a;
+    --text: #f8f8f2;
+    --primary: #f92aad;
+    --secondary: #36f9f6;
+    --muted: #6d568c;
+    --error: #ff4444;
+  }
+
+  .solarized {
+    --bg: #002b36;
+    --text: #839496;
+    --primary: #2aa198;
+    --secondary: #268bd2;
+    --muted: #586e75;
+    --error: #dc322f;
+  }
+
+  .matrix {
+    --bg: #000000;
+    --text: #00ff41;
+    --primary: #00ff41;
+    --secondary: #008f11;
+    --muted: #003b00;
+    --error: #ff0000;
+  }
+
+  .impossible {
+    --bg: #ffffff;
+    --text: #e2e2e2;
+    --primary: #d4d4d4;
+    --secondary: #f0f0f0;
+    --muted: #f9f9f9;
+    --error: #fff0f0;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] transition-colors duration-300 font-sans;
+  }
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-error: var(--error);
+  
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-family);
+}

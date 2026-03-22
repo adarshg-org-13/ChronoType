@@ -1,3 +1,5 @@
+'use client';
+
 let audioCtx: AudioContext | null = null;
 
 const initAudio = () => {
