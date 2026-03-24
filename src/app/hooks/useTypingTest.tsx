@@ -4,7 +4,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateWords } from '../utils/words';
 import { playSound } from '../utils/sounds';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 
 export type TestMode = 15 | 30 | 60;
 export type TestStatus = 'idle' | 'running' | 'finished';
