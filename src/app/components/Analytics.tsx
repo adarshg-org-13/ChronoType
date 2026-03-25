@@ -1,3 +1,4 @@
+// Analytics page, where it will show the reports of the recent and all the previous runs made by the user
 "use client";
 
 import React from 'react';
