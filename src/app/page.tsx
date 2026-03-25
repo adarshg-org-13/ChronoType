@@ -1,65 +1,64 @@
-import Image from "next/image";
+//Main page
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+"use client";
+import React from "react";
+import { useState,useCallback,useEffect } from "react";
+import { ThemeProvider,useTheme } from "./context/ThemeContext";
+import { TypingArea } from "./components/TypingArea";
+import { Analytics } from "./components/Analytics";
+import { TestMode } from "./hooks/useTypingTest";
+
+const Header = ({mode,setMode,currentView,setView,onLogoClick}:any) => {
+  const {theme,cycleTheme,font,cycleFont,soundEnabled,toggleSound,soundTheme,cycleSoundTheme,volume,setVolume} = useTheme();
+
+  return(
+    <header className="w-full max-w-5xl mx-auto py-8 flex items-center justify-between">
+      <div
+        className="flex items-center gap-2 text-primary font-bold text-3xl tracking-tighter cursor-pointer"
+        onClick={onLogoClick}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height = "12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h.01"/><path d="M12 12h.01"/><path d="M14 8h.01"/><path d="M16 12h.01"/><path d="M18 8h.01"/><path d="M6 8h.01"/><path d="M7 16h10"/><path d="M8 12h.01"/><rect width="20" height="16" x = "2" y = "4" rx = "2"/></svg>
+        <span>ChronoType</span>
+      </div>
+
+      {currentView === 'test' && (
+        <div className="flex bg-muted/20 rounded-lg p-1">
+          {[15,30,60].map((m) => (
+            <button
+             key = {m}
+             onClick={() => setMode(m as TestMode)}
+             className={`px-4 py-1 rounded-md text-sm font-medium transition-colors font-mono ${
+              mode === m? 'bg-bg text-primary shadow-sm' : 'text-muted hover:text-text'
+             }`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              {m}s
+            </button>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      )}
+
+      <div className="flex items-center gap-6 text-muted">
+        <button
+         onClick={() => setView('analytics')}
+         className={`transition-colors ${currentView === 'analytics' ? 'text-primary' : 'hover:text-text'}`}
+         title="Analytics"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height = "20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1 = "18" x2 = "18" y1 = "20" y2 = "10"/><line x1 = "12" x2 = "12" y1 = "20" y2 = "4"/><line x1 = "6" x2 = "6" y1 = "20" y2 = "14"/></svg>
+        </button>
+        <div className="flex items-center gap-2 group relative">
+          <button onClick={toggleSound} className={`transition-colors ${soundEnabled? 'text-primary':'hover:text-text'}`} title={soundEnabled ? "Sound on": "Sound off"}>
+            {soundEnabled ? (
+              <svg xmlns="htttp://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 6 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg"
+            )}
+          </button>
         </div>
-      </main>
-    </div>
-  );
+      </div>
+    </header>
+  )
 }

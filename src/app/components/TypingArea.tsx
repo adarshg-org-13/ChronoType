@@ -1,4 +1,4 @@
-//Main typing logic and typing page with the timer and the result show
+//Main typing logic and typing page with the timer and the result showcase
 "use client";
 
 import React, { useEffect, useRef, memo, useState } from 'react';
