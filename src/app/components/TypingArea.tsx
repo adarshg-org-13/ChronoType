@@ -1,4 +1,4 @@
-//Main typing logic and typing page with the timer and the result showcase
+// main typing area where the words will be shown
 "use client";
 
 import React, { useEffect, useRef, memo, useState } from 'react';
@@ -111,16 +111,16 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
 
     let flavorText = "";
     if (stats.wpm === 0) flavorText = "Keyboard not plugged in?";
-    else if (formattedPercentile < 20) flavorText = "Keep practicing!";
+    else if (formattedPercentile < 20) flavorText = "Keep practicing! You'll get there.";
     else if (formattedPercentile < 50) flavorText = "Getting closer to average!";
     else if (formattedPercentile < 80) flavorText = "Above average! Great job.";
-    else if (formattedPercentile < 95) flavorText = "Proffesinals Typing speed";
+    else if (formattedPercentile < 95) flavorText = "Fast! You're leaving most people in the dust.";
     else if (formattedPercentile < 99) flavorText = "Incredible speed! Top tier typist.";
-    else flavorText = "You better be a Hacker or Albert Wesker!";
+    else flavorText = "Godlike! Are you even human?";
 
     return (
       <div 
-        className="flex flex-col items-center justify-center space-y-8 mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
+        className="flex flex-col items-center justify-center space-y-8 mt-12 duration-500"
       >
         <div className="grid grid-cols-2 gap-12 text-center">
           <div>
@@ -134,7 +134,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
         </div>
         
         <div className="flex flex-col items-center space-y-4 w-full">
-          <div className="text-center p-4 bg-muted/10 rounded-xl border border-muted/20 max-w-md w-full animate-in zoom-in-95 duration-500 delay-150 fill-mode-both">
+          <div className="text-center p-4 bg-muted/10 rounded-xl border border-muted/20 max-w-md w-full duration-500 delay-150 fill-mode-both">
             <div className="text-xl font-bold text-text mb-1">
               {stats.wpm > 0 ? `You are faster than ${formattedPercentile}% of people!` : "You are faster than 0% of people."}
             </div>
@@ -164,13 +164,13 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
     <div className="w-full max-w-5xl mx-auto mt-12 relative">
       <div className="flex items-center justify-between mb-8 text-primary text-2xl font-mono">
         <div className={status === 'idle' ? 'opacity-0' : 'opacity-100 transition-opacity'}>
-          {timeLeft.toFixed(2)}
+          {Math.ceil(timeLeft)}
         </div>
       </div>
       
       <div 
         ref={containerRef}
-        className="text-3xl leading-[1.5em] font-mono font-bold h-[140px] overflow-hidden relative animate-in fade-in duration-500"
+        className="text-3xl leading-[1.5em] font-mono font-bold h-[140px] overflow-hidden relative duration-500"
         style={{ userSelect: 'none' }}
       >
         {status !== 'finished' && <Caret top={caretPos.top} left={caretPos.left} />}

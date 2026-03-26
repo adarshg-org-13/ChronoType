@@ -1,3 +1,4 @@
+// Main sound page where you can hear the sound effects during typing
 'use client';
 
 let audioCtx: AudioContext | null = null;

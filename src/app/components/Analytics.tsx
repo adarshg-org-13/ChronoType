@@ -1,4 +1,4 @@
-// Analytics page, where it will show the reports of the recent and all the previous runs made by the user
+// analytics tab it will show you the analytics of your recent and previous runs 
 "use client";
 
 import React from 'react';
@@ -8,7 +8,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
   if (history.length === 0) {
     return (
       <div 
-        className="text-center text-muted mt-12 font-mono flex flex-col items-center justify-center h-64 border border-dashed border-muted/30 rounded-2xl animate-in fade-in zoom-in-95 duration-300"
+        className="text-center text-muted mt-12 font-mono flex flex-col items-center justify-center h-64 border border-dashed border-muted/30 rounded-2xl duration-300"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-20"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
         <p>No data yet. Complete a test to see your analytics.</p>
@@ -30,7 +30,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-8">
-      <div className="flex justify-between items-end mb-6 animate-in fade-in duration-300">
+      <div className="flex justify-between items-end mb-6 duration-300">
         <h2 className="text-2xl font-bold text-text font-mono">Your Performance</h2>
         <div className="flex gap-3">
           <button 
@@ -45,7 +45,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div 
-          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100 fill-mode-both"
+          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 duration-500 delay-100 fill-mode-both"
         >
           <div className="p-4 bg-primary/10 rounded-xl text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -57,7 +57,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
         </div>
         
         <div 
-          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200 fill-mode-both"
+          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 duration-500 delay-200 fill-mode-both"
         >
           <div className="p-4 bg-secondary/10 rounded-xl text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
@@ -69,7 +69,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
         </div>
 
         <div 
-          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300 fill-mode-both"
+          className="bg-muted/5 border border-muted/10 rounded-2xl p-6 flex items-center gap-4 duration-500 delay-300 fill-mode-both"
         >
           <div className="p-4 bg-primary/10 rounded-xl text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
@@ -82,7 +82,7 @@ export const Analytics = ({ history, onReset }: { history: any[], onReset: () =>
       </div>
 
       <div 
-        className="h-[350px] bg-muted/5 border border-muted/10 rounded-2xl p-6 pt-8 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-500 delay-400 fill-mode-both"
+        className="h-[350px] bg-muted/5 border border-muted/10 rounded-2xl p-6 pt-8 flex flex-col duration-500 delay-400 fill-mode-both"
       >
         <div className="text-sm text-muted font-mono mb-4">WPM History</div>
         <div className="flex-1 w-full h-full min-h-[250px]">

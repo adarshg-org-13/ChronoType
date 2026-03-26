@@ -1,4 +1,4 @@
-// The main mechanism of the typing sound and the timer and the modes system
+// typing page and typing init
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from 'react';
@@ -27,12 +27,15 @@ export const useTypingTest = (mode: TestMode) => {
   }, []);
 
   const initTest = useCallback(() => {
-    setWords(generateWords(300)); // Generate enough words
+    setWords(generateWords(500)); // Generate enough words
     setTypedWords(['']);
     setStatus('idle');
     setTimeLeft(mode);
     setStartTime(null);
-    if (timerRef.current) clearInterval(timerRef.current);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
   }, [mode]);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export const useTypingTest = (mode: TestMode) => {
   }, [initTest]);
 
   const startTest = useCallback(() => {
-    if (status !== 'idle') return;
+    if (status !== 'idle' || timerRef.current) return;
     setStatus('running');
     const now = Date.now();
     setStartTime(now);
@@ -51,10 +54,13 @@ export const useTypingTest = (mode: TestMode) => {
       setTimeLeft(remaining);
       
       if (remaining <= 0) {
-        if (timerRef.current) clearInterval(timerRef.current);
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
         setStatus('finished');
       }
-    }, 10); // Update every 10ms for smooth sub-second rendering
+    }, 100); // Update every 100ms for better performance
   }, [status, mode]);
 
   let correctChars = 0;
@@ -101,7 +107,7 @@ export const useTypingTest = (mode: TestMode) => {
     if (e.key === ' ') {
       e.preventDefault();
       if (status === 'idle') {
-        initTest();
+        if (!e.repeat) initTest();
         return;
       }
       setTypedWords((prev) => {
