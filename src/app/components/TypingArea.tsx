@@ -3,6 +3,7 @@
 
 import React, { useEffect, useRef, memo, useState } from 'react';
 import { useTypingTest, TestMode } from '../hooks/useTypingTest';
+import { VirtualKeyboard } from './VirtualKeyboard';
 
 const Caret = ({ top, left }: { top: number, left: number }) => (
   <div
@@ -91,10 +92,10 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
       const wordTop = activeWordEl.offsetTop;
       const containerScrollTop = containerEl.scrollTop;
       
-      // If the active word drops below the first visible line (approx 50px)
-      if (wordTop - containerScrollTop > 50) {
+      // If the active word drops below the second visible line (approx 100px)
+      if (wordTop - containerScrollTop > 100) {
         containerEl.scrollTo({
-          top: wordTop - 10,
+          top: wordTop - 50,
           behavior: 'smooth'
         });
       }
@@ -170,7 +171,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
       
       <div 
         ref={containerRef}
-        className="text-3xl leading-[1.5em] font-mono font-bold h-[140px] overflow-hidden relative duration-500"
+        className="text-3xl leading-[1.5em] font-mono font-bold h-[225px] overflow-hidden relative duration-500"
         style={{ userSelect: 'none' }}
       >
         {status !== 'finished' && <Caret top={caretPos.top} left={caretPos.left} />}
@@ -191,6 +192,8 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
           })}
         </div>
       </div>
+
+      {status !== 'finished' && <VirtualKeyboard />}
     </div>
   );
 };

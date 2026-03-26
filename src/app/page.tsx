@@ -1,4 +1,3 @@
-/* Main page website with all the analytics modes themes added to it also the delte data works for that specific period of time and the data is shown again after revisting of the website to prevent accidental data deletion*/
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -128,14 +127,17 @@ const Main = () => {
   return (
     <div className="min-h-screen flex flex-col px-6">
       <Header mode={mode} setMode={setMode} currentView={view} setView={setView} onLogoClick={handleLogoClick} />
-      <main className="flex-1 flex flex-col justify-center pb-32">
+      <main className="flex-1 flex flex-col justify-center">
         {view === 'test' ? (
           <div className="duration-300">
             <TypingArea key={testKey} mode={mode} onFinish={handleFinish} />
           </div>
         ) : (
           <div className="duration-300">
-            <Analytics history={history} onReset={() => setHistory([])} />
+            <Analytics history={history} onReset={() => {
+              setHistory([]);
+              localStorage.removeItem('chronotype_history');
+            }} />
           </div>
         )}
       </main>
