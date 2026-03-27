@@ -4,6 +4,7 @@
 ChronoType is a typing website where you can practice your typing and imporve your typing skills and become a proffesional typist this website comes with more than 5+ themes and 10+ fonts and also comes with a virtual keyboard which shows you the exact keys that you have pressed in the keyboard this project is fully open source and can be used for personal as well as industrial use
 
 ![main img](https://github.com/adarshg-org-13/ChronoType/blob/1d0fc6fb80debe6ed8f54dbbf4cf46d55b8e3913/Screenshot%202026-03-27%20132430.png)
+![analytics img](https://github.com/adarshg-org-13/ChronoType/blob/9424961308d30c13cbbc80af15778d63f0ef9502/Screenshot%202026-03-27%20132528.png)
 This project uses some external modules :-
 
 Modules can be installed by running the following commands
