@@ -8,6 +8,12 @@ ChronoType is a typing website where you can practice your typing and imporve yo
 ![analytics img](https://github.com/adarshg-org-13/ChronoType/blob/9424961308d30c13cbbc80af15778d63f0ef9502/Screenshot%202026-03-27%20132528.png)
 ![theme 1](https://github.com/adarshg-org-13/ChronoType/blob/fee1fffc6d2c4245a0051ef7a2b24f38cd4cfab5/Screenshot%202026-03-27%20132608.png)
 ![theme 2](https://github.com/adarshg-org-13/ChronoType/blob/a6422ed4e5e2303ec3ac0be711d62e6adee5a1eb/Screenshot%202026-03-27%20132535.png)
+![theme 3](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132540.png)
+![theme 4](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132546.png)
+![theme 5](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132551.png)
+![theme 6](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132557.png)
+![theme 7](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132602.png)
+![theme 8](https://github.com/adarshg-org-13/ChronoType/blob/bc234a0d88fc220171c203ea2a3e8b239bca828d/Screenshot%202026-03-27%20132615.png)
 This project uses some external modules :-
 
 Modules can be installed by running the following commands
