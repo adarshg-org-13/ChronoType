@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { generateWords } from '../utils/words';
 import { playSound } from '../utils/sounds';
 import { useTheme } from '../context/ThemeContext';
@@ -11,12 +11,11 @@ export type TestStatus = 'idle' | 'running' | 'finished';
 export const useTypingTest = (mode: TestMode) => {
   const [status, setStatus] = useState<TestStatus>('idle');
   const [timeLeft, setTimeLeft] = useState<number>(mode);
-  const [startTime, setStartTime] = useState<number | null>(null);
   const [words, setWords] = useState<string[]>([]);
   const [typedWords, setTypedWords] = useState<string[]>(['']);
   
   const { soundEnabled, soundTheme, volume } = useTheme();
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -30,7 +29,6 @@ export const useTypingTest = (mode: TestMode) => {
     setTypedWords(['']);
     setStatus('idle');
     setTimeLeft(mode);
-    setStartTime(null);
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -45,7 +43,6 @@ export const useTypingTest = (mode: TestMode) => {
     if (status !== 'idle' || timerRef.current) return;
     setStatus('running');
     const now = Date.now();
-    setStartTime(now);
     
     timerRef.current = setInterval(() => {
       const elapsed = (Date.now() - now) / 1000;
@@ -92,7 +89,7 @@ export const useTypingTest = (mode: TestMode) => {
   const minutes = timeElapsed / 60;
   const wpm = minutes > 0 ? Math.round((correctChars / 5) / minutes) : 0;
 
-  const stats = { wpm, accuracy, correctChars, incorrectChars };
+  const stats = useMemo(() => ({ wpm, accuracy, correctChars, incorrectChars }), [wpm, accuracy, correctChars, incorrectChars]);
 
   useEffect(() => {
     if (status === 'finished') {
@@ -100,7 +97,7 @@ export const useTypingTest = (mode: TestMode) => {
     }
   }, [status, soundEnabled, soundTheme, volume]);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: globalThis.KeyboardEvent) => {
     if (status === 'finished') return;
     
     if (e.key === ' ') {

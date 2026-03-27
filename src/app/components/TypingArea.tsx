@@ -173,7 +173,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: { wpm: num
         className="text-3xl leading-[1.5em] font-mono font-bold h-[225px] overflow-hidden relative duration-500"
         style={{ userSelect: 'none' }}
       >
-        {status !== 'finished' ? <Caret top={caretPos.top} left={caretPos.left} /> : null}
+        {status === 'running' ? <Caret top={caretPos.top} left={caretPos.left} /> : null}
         <div className="flex flex-wrap gap-x-4 gap-y-2">
           {words.map((word, wordIdx) => {
             const typedWord = typedWords[wordIdx];
@@ -192,7 +192,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: { wpm: num
         </div>
       </div>
 
-      {status !== 'finished' ? <VirtualKeyboard /> : null}
+      {status === 'running' ? <VirtualKeyboard /> : null}
     </div>
   );
 };

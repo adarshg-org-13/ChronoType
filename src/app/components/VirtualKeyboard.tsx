@@ -1,6 +1,5 @@
-// Main virtual keyboard file
-import React from "react";
-import { useState,useEffect } from "react";
+import { useEffect, useState } from 'react';
+
 const KEYBOARD_LAYOUT = [
   [
     { code: 'Backquote', label: '`' }, { code: 'Digit1', label: '1' }, { code: 'Digit2', label: '2' }, { code: 'Digit3', label: '3' }, { code: 'Digit4', label: '4' }, { code: 'Digit5', label: '5' }, { code: 'Digit6', label: '6' }, { code: 'Digit7', label: '7' }, { code: 'Digit8', label: '8' }, { code: 'Digit9', label: '9' }, { code: 'Digit0', label: '0' }, { code: 'Minus', label: '-' }, { code: 'Equal', label: '=' }, { code: 'Backspace', label: '←', width: 'w-12 sm:w-16 md:w-24' }
@@ -23,14 +22,14 @@ export const VirtualKeyboard = () => {
   const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
       setActiveKeys(prev => {
         const next = new Set(prev);
         next.add(e.code);
         return next;
       });
     };
-    const handleKeyUp = (e: KeyboardEvent) => {
+    const handleKeyUp = (e: globalThis.KeyboardEvent) => {
       setActiveKeys(prev => {
         const next = new Set(prev);
         next.delete(e.code);
@@ -48,9 +47,10 @@ export const VirtualKeyboard = () => {
   }, []);
 
   return (
-    <div className="w-fit mx-auto mt-16 flex flex-col gap-2 p-4 sm:p-6 rounded-2xl bg-transparent border-2 border-muted/10 backdrop-blur-sm">
-      {KEYBOARD_LAYOUT.map((row, i) => (
-        <div key={i} className="flex justify-center gap-1 sm:gap-2">
+    <div className="w-full flex flex-col items-center mt-16 opacity-70 transition-opacity hover:opacity-100">
+      <div className="flex flex-col gap-2 p-4 sm:p-6 rounded-2xl bg-transparent border-2 border-muted/10 backdrop-blur-sm">
+        {KEYBOARD_LAYOUT.map((row, i) => (
+          <div key={i} className="flex justify-center gap-1 sm:gap-2">
           {row.map((key) => {
             const isActive = activeKeys.has(key.code);
             return (
@@ -70,6 +70,7 @@ export const VirtualKeyboard = () => {
           })}
         </div>
       ))}
+      </div>
     </div>
   );
 };
