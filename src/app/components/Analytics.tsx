@@ -1,17 +1,18 @@
-// analytics tab it will show you the analytics of your recent and previous runs 
 "use client";
 
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-export const Analytics = ({ history, onReset }: { history: any[], onReset: () => void }) => {
+import { TestMode } from '../hooks/useTypingTest';
+
+export const Analytics = ({ history, onReset }: { history: Array<{ wpm: number, accuracy: number, correctChars: number, incorrectChars: number, date: string, mode: TestMode }>, onReset: () => void }) => {
   if (history.length === 0) {
     return (
       <div 
-        className="text-center text-muted mt-5 font-mono font-bold text-xl flex flex-col items-center justify-center h-100 w-300 mx-auto border border-dashed border-muted/30 rounded-4xl duration-300"
+        className="text-center text-muted mt-12 font-mono flex flex-col items-center justify-center h-64 border border-dashed border-muted/30 rounded-2xl duration-300"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-20"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
-        <p>No data yet. Complete a typing test to show the analytics</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-20"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
+        <p>No data yet. Complete a test to see your analytics.</p>
       </div>
     );
   }

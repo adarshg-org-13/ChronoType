@@ -11,7 +11,7 @@ import { TypingArea } from './components/TypingArea';
 import { Analytics } from './components/Analytics';
 import { TestMode } from './hooks/useTypingTest';
 
-const Header = ({ mode, setMode, currentView, setView, onLogoClick }: any) => {
+const Header = ({ mode, setMode, currentView, setView, onLogoClick }: { mode: TestMode, setMode: (m: TestMode) => void, currentView: 'test' | 'analytics', setView: (v: 'test' | 'analytics') => void, onLogoClick: () => void }) => {
   const { theme, cycleTheme, font, cycleFont, soundEnabled, toggleSound, soundTheme, cycleSoundTheme, volume, setVolume } = useTheme();
 
   return (
@@ -89,7 +89,7 @@ const Header = ({ mode, setMode, currentView, setView, onLogoClick }: any) => {
 
 const Main = () => {
   const [mode, setMode] = useState<TestMode>(30);
-  const [history, setHistory] = useState<any[]>([]);
+  const [history, setHistory] = useState<Array<{ wpm: number, accuracy: number, correctChars: number, incorrectChars: number, date: string, mode: TestMode }>>([]);
   const [view, setView] = useState<'test' | 'analytics'>('test');
   const [testKey, setTestKey] = useState(0);
 
@@ -112,7 +112,7 @@ const Main = () => {
     }
   }, [history]);
 
-  const handleFinish = useCallback((stats: any) => {
+  const handleFinish = useCallback((stats: { wpm: number, accuracy: number, correctChars: number, incorrectChars: number }) => {
     setHistory(prev => {
       const newHistory = [...prev, { ...stats, date: new Date().toISOString(), mode }];
       return newHistory.slice(-50); // Keep only the last 50 tests
@@ -142,7 +142,7 @@ const Main = () => {
         )}
       </main>
       <footer className="py-6 text-center text-muted text-sm font-mono">
-        <p>Press <kbd className="bg-muted/20 px-2 py-1 rounded">space</kbd> to reload sentence • Just start typing to begin the test</p>
+        <p>Press <kbd className="bg-muted/20 px-2 py-1 rounded">space</kbd> to reload sentence • Just start typing to begin</p>
       </footer>
     </div>
   );
