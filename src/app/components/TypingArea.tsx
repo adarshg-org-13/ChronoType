@@ -1,3 +1,4 @@
+//Main typing area file
 "use client";
 
 import React, { useEffect, useRef, memo, useState } from 'react';

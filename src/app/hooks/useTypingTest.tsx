@@ -1,3 +1,4 @@
+//main functions and init of the typing
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
