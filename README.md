@@ -7,6 +7,7 @@ ChronoType is a typing website where you can practice your typing and imporve yo
 ![summary img](https://github.com/adarshg-org-13/ChronoType/blob/58d93527596301139aeb4f93b6b5d3468142b76c/Screenshot%202026-03-27%20132500.png)
 ![analytics img](https://github.com/adarshg-org-13/ChronoType/blob/9424961308d30c13cbbc80af15778d63f0ef9502/Screenshot%202026-03-27%20132528.png)
 ![theme 1](https://github.com/adarshg-org-13/ChronoType/blob/fee1fffc6d2c4245a0051ef7a2b24f38cd4cfab5/Screenshot%202026-03-27%20132608.png)
+![theme 2](https://github.com/adarshg-org-13/ChronoType/blob/a6422ed4e5e2303ec3ac0be711d62e6adee5a1eb/Screenshot%202026-03-27%20132535.png)
 This project uses some external modules :-
 
 Modules can be installed by running the following commands
