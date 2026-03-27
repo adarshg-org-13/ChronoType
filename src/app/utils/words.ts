@@ -24,12 +24,15 @@ export const SENTENCES = [
   "The future belongs to those who believe in the beauty of their dreams.",
   "Tell me and I forget. Teach me and I remember. Involve me and I learn.",
   "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
+  "Do the best you can until you know better.",
   "It is during our darkest moments that we must focus to see the light.",
   "Whoever is happy will make others happy too.",
+  "Stay afraid, but do it anyway",
+  "One can choose to go back towards saftey or forward toward the growth.",
   "Do not go where the path may lead, go instead where there is no path and leave a trail."
 ];
 
-export const generateWords = (count: number = 500) => {
+export const generateWords = (count: number = 800) => {
   const words: string[] = [];
   while (words.length < count) {
     const randomSentence = SENTENCES[Math.floor(Math.random() * SENTENCES.length)];

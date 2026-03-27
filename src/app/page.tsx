@@ -142,7 +142,7 @@ const Main = () => {
         )}
       </main>
       <footer className="py-6 text-center text-muted text-sm font-mono">
-        <p>Press <kbd className="bg-muted/20 px-2 py-1 rounded">space</kbd> to reload sentence • Just start typing to begin</p>
+        <p>Press <kbd className="bg-muted/20 px-2 py-1 rounded">space</kbd> to reload sentence • Just start typing to begin the test</p>
       </footer>
     </div>
   );

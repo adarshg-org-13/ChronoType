@@ -112,12 +112,12 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
 
     let flavorText = "";
     if (stats.wpm === 0) flavorText = "Keyboard not plugged in?";
-    else if (formattedPercentile < 20) flavorText = "Keep practicing! You'll get there.";
-    else if (formattedPercentile < 50) flavorText = "Getting closer to average!";
-    else if (formattedPercentile < 80) flavorText = "Above average! Great job.";
-    else if (formattedPercentile < 95) flavorText = "Fast! You're leaving most people in the dust.";
+    else if (formattedPercentile < 20) flavorText = "You need to practice by a lot!";
+    else if (formattedPercentile < 50) flavorText = "Average typing speed";
+    else if (formattedPercentile < 80) flavorText = "Above average speed.";
+    else if (formattedPercentile < 95) flavorText = "Proffesional standard.";
     else if (formattedPercentile < 99) flavorText = "Incredible speed! Top tier typist.";
-    else flavorText = "Godlike! Are you even human?";
+    else flavorText = "You should be a Hacker or u are just Albert Wesker";
 
     return (
       <div 
