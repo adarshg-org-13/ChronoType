@@ -14,9 +14,19 @@ const Caret = ({ top, left }: { top: number, left: number }) => (
   </div>
 );
 
-const Word = memo(({ word, typedWord, isActive, activeCharRef }: { word: string, typedWord?: string, isActive: boolean, activeCharRef: React.MutableRefObject<HTMLSpanElement | null> }) => {
+const Word = memo(({ 
+  word, 
+  typedWord, 
+  isActive, 
+  activeCharRef 
+}: { 
+  word: string, 
+  typedWord?: string, 
+  isActive: boolean, 
+  activeCharRef: React.MutableRefObject<HTMLSpanElement | null> 
+}) => {
   return (
-    <div className={`flex ${isActive ? 'active-word' : ''}`}>
+    <div className={`flex flex-wrap ${isActive ? 'active-word' : ''}`}>
       {word.split('').map((char, charIdx) => {
         let charClass = "text-muted";
         if (typedWord !== undefined) {
@@ -24,26 +34,38 @@ const Word = memo(({ word, typedWord, isActive, activeCharRef }: { word: string,
             charClass = typedWord[charIdx] === char ? "text-text" : "text-error";
           }
         }
+        
+        // Only attach ref if this is the ACTIVE character in the ACTIVE word
         const isCaretHere = isActive && (typedWord?.length || 0) === charIdx;
         
         return (
-          <span key={charIdx} ref={isCaretHere ? activeCharRef : null} className={`${charClass}`}>
+          <span 
+            key={charIdx} 
+            ref={isCaretHere ? activeCharRef : null} 
+            className={`${charClass}`}
+          >
             {char}
           </span>
         );
       })}
       
+      {/* Extra characters typed beyond word length */}
       {typedWord && typedWord.length > word.length && typedWord.slice(word.length).split('').map((char, charIdx) => {
         const isCaretHere = isActive && typedWord.length === word.length + charIdx;
         return (
-          <span key={`extra-${charIdx}`} ref={isCaretHere ? activeCharRef : null} className="text-error opacity-70">
+          <span 
+            key={`extra-${charIdx}`} 
+            ref={isCaretHere ? activeCharRef : null} 
+            className="text-error opacity-70"
+          >
             {char}
           </span>
         );
       })}
       
+      {/* Empty span for caret at the end of the word */}
       {isActive && (typedWord?.length || 0) >= word.length && (
-        <span ref={activeCharRef}></span>
+        <span ref={((typedWord?.length || 0) === word.length) ? activeCharRef : null}></span>
       )}
     </div>
   );
@@ -83,7 +105,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
     }
   }, [typedWords, status, words]);
 
-  // Scroll to active line only when moving to a new line
+  // Scroll to active line
   useEffect(() => {
     const activeWordEl = containerRef.current?.querySelector('.active-word') as HTMLElement;
     const containerEl = containerRef.current;
@@ -92,7 +114,6 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
       const wordTop = activeWordEl.offsetTop;
       const containerScrollTop = containerEl.scrollTop;
       
-      // If the active word drops below the second visible line (approx 100px)
       if (wordTop - containerScrollTop > 100) {
         containerEl.scrollTo({
           top: wordTop - 50,
@@ -105,24 +126,21 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
   if (status === 'finished') {
     let formattedPercentile = 0;
     if (stats.wpm > 0) {
-      // Logistic curve centered at 40 WPM (average typing speed)
       const p = 100 / (1 + Math.exp(-0.07 * (stats.wpm - 40)));
       formattedPercentile = p >= 99.9 ? 99.9 : Math.round(p);
     }
 
     let flavorText = "";
     if (stats.wpm === 0) flavorText = "Keyboard not plugged in?";
-    else if (formattedPercentile < 20) flavorText = "You need to practice by a lot!";
-    else if (formattedPercentile < 50) flavorText = "Average typing speed";
+    else if (formattedPercentile < 20) flavorText = "You need to practice a lot!";
+    else if (formattedPercentile < 50) flavorText = "Average typing speed.";
     else if (formattedPercentile < 80) flavorText = "Above average speed.";
-    else if (formattedPercentile < 95) flavorText = "Proffesional standard.";
+    else if (formattedPercentile < 95) flavorText = "Professional standard.";
     else if (formattedPercentile < 99) flavorText = "Incredible speed! Top tier typist.";
-    else flavorText = "You should be a Hacker or u are just Albert Wesker";
+    else flavorText = "You're a legend! Are you Albert Wesker?";
 
     return (
-      <div 
-        className="flex flex-col items-center justify-center space-y-8 mt-12 duration-500"
-      >
+      <div className="flex flex-col items-center justify-center space-y-8 mt-12 duration-500">
         <div className="grid grid-cols-2 gap-12 text-center">
           <div>
             <div className="text-muted text-2xl mb-2 font-mono">wpm</div>
@@ -135,7 +153,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
         </div>
         
         <div className="flex flex-col items-center space-y-4 w-full">
-          <div className="text-center p-4 bg-muted/10 rounded-xl border border-muted/20 max-w-md w-full duration-500 delay-150 fill-mode-both">
+          <div className="text-center p-4 bg-muted/10 rounded-xl border border-muted/20 max-w-md w-full">
             <div className="text-xl font-bold text-text mb-1">
               {stats.wpm > 0 ? `You are faster than ${formattedPercentile}% of people!` : "You are faster than 0% of people."}
             </div>
@@ -174,15 +192,16 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
         className="text-3xl leading-[1.5em] font-mono font-bold h-[225px] overflow-hidden relative duration-500"
         style={{ userSelect: 'none' }}
       >
-        {status !== 'finished' && <Caret top={caretPos.top} left={caretPos.left} />}
+        {(status as string) !== 'finished' && <VirtualKeyboard />}
         <div className="flex flex-wrap gap-x-4 gap-y-2">
           {words.map((word, wordIdx) => {
             const typedWord = typedWords[wordIdx];
+            // Only the word being typed is active
             const isActive = wordIdx === typedWords.length - 1;
 
             return (
               <Word 
-                key={wordIdx} 
+                key={`${wordIdx}-${word}`} 
                 word={word} 
                 typedWord={typedWord} 
                 isActive={isActive} 
@@ -193,7 +212,7 @@ export const TypingArea: React.FC<{ mode: TestMode; onFinish: (stats: any) => vo
         </div>
       </div>
 
-      {status !== 'finished' && <VirtualKeyboard />}
+      {(status as string) !== 'finished' && <Caret top={caretPos.top} left={caretPos.left} />}
     </div>
   );
 };
