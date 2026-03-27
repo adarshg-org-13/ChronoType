@@ -1,3 +1,4 @@
+
 # ChronoType : A Typing Website
 
 ChronoType is a typing website where you can practice your typing and imporve your typing skills and become a proffesional typist this website comes with more than 5+ themes and 10+ fonts and also comes with a virtual keyboard which shows you the exact keys that you have pressed in the keyboard this project is fully open source and can be used for personal as well as industrial use
@@ -27,4 +28,7 @@ The Link of the website :- https://chronotype-alpha.vercel.app/
 
 The website is hosted on Vercel 
 
+I used some inspirations of this website from :- https://monkeytype.com/
+
 ---Made by Adarsh Gusain---
+
