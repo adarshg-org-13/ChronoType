@@ -1,4 +1,3 @@
-// typing page and typing init
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from 'react';
