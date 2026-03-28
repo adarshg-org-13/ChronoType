@@ -35,7 +35,7 @@ This website also comes with custom sound that is played during typing
 
 The framework used is Next.js 16+
 
-The Link of the website :- https://chronotype-alpha.vercel.app/
+The Link of the website :- https://chrono-type.vercel.app/
 
 The website is hosted on Vercel 
 
